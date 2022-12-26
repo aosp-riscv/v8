@@ -5517,6 +5517,8 @@ v8_component("v8_libbase") {
     "src/base/vlq.h",
   ]
 
+  libs = []
+
   configs = [ ":internal_config_base" ]
 
   public_configs = [ ":libbase_config" ]
