@@ -551,7 +551,15 @@ path. Add it with -I<path> to the command line
 //   V8_NODISCARD Foo() { ... };
 // [[nodiscard]] comes in C++17 but supported in clang with -std >= c++11.
 #if V8_HAS_CPP_ATTRIBUTE_NODISCARD
-#define V8_NODISCARD [[nodiscard]]
+// // FIXME: Currently, Android RISCV64 only supports a clang older version 12.0.x.
+// //        Seems combining the C++11 alignas specifier and the GNU __attribute__ specifier are not supported.
+// // Ref: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69585#c5
+// #if (defined(__riscv) && (__riscv_xlen == 64)) && defined(__ANDROID__)
+// #define V8_NODISCARD __attribute__((warn_unused_result))
+// #else
+// #define V8_NODISCARD [[nodiscard]]
+// #endif
+#define V8_NODISCARD __attribute__((warn_unused_result))
 #else
 #define V8_NODISCARD /* NOT SUPPORTED */
 #endif

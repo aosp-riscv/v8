@@ -20,7 +20,8 @@ void CpuFeatures::FlushICache(void* start, size_t size) {
   //                 uintptr_t, end, uintptr_t, flags)
   // The flag here is set to be SYS_RISCV_FLUSH_ICACHE_LOCAL, which is
   // defined as 1 in the Linux kernel.
-  syscall(SYS_riscv_flush_icache, start, end, 1);
+  // syscall(SYS_riscv_flush_icache, start, end, 1);
+  syscall(__NR_riscv_flush_icache, start, end, 1);
 #endif  // !USE_SIMULATOR.
 }
 
