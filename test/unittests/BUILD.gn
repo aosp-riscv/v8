@@ -83,7 +83,7 @@ if (cppgc_is_standalone) {
   v8_executable("cppgc_unittests") {
     testonly = true
     if (v8_current_cpu == "riscv64" || v8_current_cpu == "riscv32") {
-      if (target_os != "android") {
+      if (!is_clang) {
         libs = [ "atomic" ]
       }
     }
